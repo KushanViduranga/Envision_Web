@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="jumbtron">
+        <h1 style="text-align: center">Aircraft Logs</h1>
+        <hr>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input name="make" #make="ngModel" [(ngModel)]="filterMake" class="form-control" placeholder="Make">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input name="model" #model="ngModel" [(ngModel)]="filterModel" class="form-control" placeholder="Model">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input name="registration" #registration="ngModel" [(ngModel)]="filterRegistration"
+                        class="form-control" placeholder="Registration">
+                </div>
+            </div>
+            <div class="col-md-1" style="margin-top: 10px;">
+                <a class="btn btn-primary" style="float: right" (click)="searchAircraftLog()">Search</a>
+            </div>
+            <div class="col-md-2" style="margin-top: 10px;">
+                <a class="btn btn-primary" style="float: right" routerLink="/newAircraftLog">New</a>
+            </div>
+            <div class="col-md-12" style="margin-top: 2%;">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Make</th>
+                            <th>Model</th>
+                            <th>Registration</th>
+                            <th>Location</th>
+                            <th>Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let aircraft of aircraftLogList">
+                            <td [routerLink]="['/loadAircraftLog', aircraft.id]">{{ aircraft.make }}</td>
+                            <td [routerLink]="['/loadAircraftLog', aircraft.id]">{{ aircraft.model }}</td>
+                            <td [routerLink]="['/loadAircraftLog', aircraft.id]">{{ aircraft.registration }}</td>
+                            <td [routerLink]="['/loadAircraftLog', aircraft.id]">{{ aircraft.location }}</td>
+                            <td [routerLink]="['/loadAircraftLog', aircraft.id]">{{ aircraft.dateTime | date : 'short'
+                                }}</td>
+                            <td><button class="btn btn-danger btn-sm"
+                                    (click)="deleteAircraftLog(aircraft.id)">X</button>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

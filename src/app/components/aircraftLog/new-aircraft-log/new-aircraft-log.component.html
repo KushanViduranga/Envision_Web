@@ -1,0 +1,62 @@
+<div class="container">
+    <h2 style="text-align: center">{{this.title}}</h2>
+    <hr>
+    <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formData.id">
+                <div class="form-group">
+                    <label>Make</label>
+                    <input name="make" #make="ngModel" [(ngModel)]="formData.make" class="form-control" maxlength="128"
+                        required>
+                    <div class="validation-error" *ngIf="make.invalid && make.touched">This field is required.</div>
+                </div>
+                <div class="form-group">
+                    <label>Model</label>
+                    <input name="model" #model="ngModel" [(ngModel)]="formData.model" class="form-control"
+                        maxlength="128" required>
+                    <div class="validation-error" *ngIf="model.invalid && model.touched">This field is required.</div>
+                </div>
+                <div class="form-group">
+                    <label>Registration</label>
+                    <input name="registration" #registration="ngModel" [(ngModel)]="formData.registration"
+                        class="form-control" placeholder="XX-XXXXX" required>
+                    <div class="validation-error" *ngIf="registration.invalid && registration.touched">This field is
+                        required.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input name="location" #location="ngModel" [(ngModel)]="formData.location" class="form-control"
+                        maxlength="255" required>
+                    <div class="validation-error" *ngIf="location.invalid && location.touched">This field is required.
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label>Date</label>
+                    <div class="col-md-6">
+                        <input type="date" name="date" #date="ngModel" [(ngModel)]="formData.date" class="form-control"
+                            required>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="time" name="time" #time="ngModel" [(ngModel)]="formData.time" class="form-control"
+                            required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Upload Image(.jpg)</label>
+                    <input type="file" id="filePicker" (change)="onFileSelected($event)" class="form-control" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <button type="submit" [disabled]="form.invalid" class="btn btn-sm btn-block">Save</button>
+                    <button type="reset" class="btn btn-sm btn-block" style="margin-left: 1%;">Reset</button>
+                    <button type="button" class="btn btn-sm btn-warning" style="margin-left: 1%;" (click)="onBack()">Back</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img [src]="imageUrl" style="width: 250x; height: 250px; margin-left: 10%; margin-top: 5%;">
+            </div>
+        </div>
+
+    </form>
+</div>
