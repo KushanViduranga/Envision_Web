@@ -20,7 +20,7 @@
                 <div class="form-group">
                     <label>Registration</label>
                     <input name="registration" #registration="ngModel" [(ngModel)]="formData.registration"
-                        class="form-control" placeholder="XX-XXXXX" required>
+                        class="form-control" placeholder="XX-XXXXX" (ngModelChange)="onValidateRegistration($event, 'change')" maxlength="8" required>
                     <div class="validation-error" *ngIf="registration.invalid && registration.touched">This field is
                         required.
                     </div>

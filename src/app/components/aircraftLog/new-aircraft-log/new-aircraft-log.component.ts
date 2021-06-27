@@ -148,24 +148,56 @@ export class NewAircraftLogComponent implements OnInit {
       this.toastr.warning("Select Valid Image", "New Aircraft Log");
       return false;
     }
-    else if (formData.registration.length > 8) {
-      this.toastr.warning("Registration is invalid", "New Aircraft Log");
+    else if (this.onValidateRegistration(formData.registration, 'save') == false) {
       return false;
     }
-    else if (formData.registration.length <= 8) {
-      let reg_No = formData.registration.split("-");
-      if (reg_No[0].length > 2) {
-        this.toastr.warning("Registration No is invalid", "New Aircraft Log");
-        return false;
-      }
-      else if (reg_No[0].length > 5) {
-        this.toastr.warning("Registration No is invalid", "New Aircraft Log");
-        return false;
-      }
+    // else if (formData.registration.length > 8) {
+    //   this.toastr.warning("Registration is invalid", "New Aircraft Log");
+    //   return false;
+    // }    
+    // else if (formData.registration.length <= 8) {
+    //   let reg_No = formData.registration.split("-");
+    //   if (reg_No[0].length > 2) {
+    //     this.toastr.warning("Registration No is invalid", "New Aircraft Log");
+    //     return false;
+    //   }
+    //   else if (reg_No[0].length > 5) {
+    //     this.toastr.warning("Registration No is invalid", "New Aircraft Log");
+    //     return false;
+    //   }
 
-    }
+    // }
 
     return true;
+  }
+
+  onValidateRegistration(RegNo: string, event: string): boolean {
+    let isValidRegNo: boolean = true;
+    let reg_No = RegNo.split("-");
+
+    if (RegNo.length >= 3) {
+      if (reg_No[0].length == 0 || reg_No[0].length > 2) {
+        isValidRegNo = false;
+      }
+      else if (reg_No[1].length > 5) {
+        isValidRegNo = false;
+      }
+      else if (reg_No.length > 2) {
+        isValidRegNo = false;
+      }
+    }
+
+    if (event == "save") {
+      if (reg_No.length < 2) {
+        isValidRegNo = false;
+      }
+      else if (reg_No[1].length == 0) {
+        isValidRegNo = false;
+      }
+    }
+
+    if (isValidRegNo == false) { this.toastr.warning("Format should be XX-XXXXX", "Registration No"); }
+    return isValidRegNo;
   }
 
   onFileSelected(evt: any) {
